@@ -1,4 +1,4 @@
-# 🧱 RStudio Loader Plugin
+# 🧱 Loader Plugin
 
 **Easy Minecraft server setup with automatic plugin installation and configuration**
 
@@ -84,7 +84,7 @@ Basic settings can be adjusted through the configuration files generated after f
 
 ## 🔮 Future Plans
 
-We're actively developing new features to make RStudio Loader even better:
+We're actively developing new features to make Loader even better:
 
 - **Web Control Panel**: Browser-based interface for server management
 - **Premium Version**: Additional features and priority support
