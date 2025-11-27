@@ -96,7 +96,7 @@ We're actively developing new features to make Loader even better:
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! If you'd like to help improve RStudio Loader:
+We welcome contributions from the community! If you'd like to help improve Loader:
 
 1. **Fork the repository** on GitHub
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -109,15 +109,6 @@ We welcome contributions from the community! If you'd like to help improve RStud
 ## 📜 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](https://mit-license.org/) file for details.
-
-### Why MIT License?
-The MIT License is simple, permissive, and easy to understand. It allows users to:
-- Use the software for any purpose
-- Modify the code
-- Distribute modified versions
-- Use the software in commercial projects
-
-All you need to do is include the original license and copyright notice. It's perfect for open-source Minecraft plugins where we want to encourage sharing and collaboration.
 
 > ⚠️ **Important**: Claiming this plugin as your own work is prohibited and punishable by law. Please respect the open-source community and give proper credit.
 
