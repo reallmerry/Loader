@@ -171,7 +171,7 @@ Key components of the loader:
 
 If you like the idea or the project itself and want to see its development continue — please give it a star on GitHub! ⭐
 
-Stars help the project gain visibility in the community and motivate me to keep improving it. Even though I'm still learning why this matters so much, I'm joining this wonderful open-source tradition! 😊
+Stars help the project gain visibility in the community and motivate me to keep improving it.😊
 
 Every star makes me happy and shows that my work is appreciated. Thank you for your support!
 
