@@ -1,0 +1,12 @@
+name: Loader
+version: '1.0'
+main: io.reallmerry.rstudio.loader.Loader
+load: POSTWORLD
+authors: [ reallmerry ]
+description: Loader
+website: rstudio-cdn.vercel.app
+commands:
+  spin:
+    description: test cmd
+    aliases:
+      - test
