@@ -137,7 +137,8 @@ Need help or have questions? Contact us:
 ### Storage Requirements
 For optimal performance, we recommend hosting your plugin files on a reliable CDN like Vercel.app. The plugin expects download URLs in the format:
 ```
-https://your-cdn-domain.com/pl/plugin-name.jar
+https://your-cdn-domain.com/plugin-name.jar
+author use: https://your-cdn-domain.com/pl/plugin-name.jar
 ```
 
 ### Code Quality Note
