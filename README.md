@@ -167,5 +167,16 @@ Key components of the loader:
 
 ---
 
-*Plugin Version: 1.21*  
+## ⭐ Support the Project
+
+If you like the idea or the project itself and want to see its development continue — please give it a star on GitHub! ⭐
+
+Stars help the project gain visibility in the community and motivate me to keep improving it. Even though I'm still learning why this matters so much, I'm joining this wonderful open-source tradition! 😊
+
+Every star makes me happy and shows that my work is appreciated. Thank you for your support!
+
+---
+
+*Plugin Version: 1.21* 
+*maybe work on all versions*
 *Last Updated: November 2025*
