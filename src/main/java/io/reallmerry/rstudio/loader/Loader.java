@@ -20,12 +20,10 @@ public final class Loader extends JavaPlugin {
     public void onEnable() {
         this.log = new LoggerManager(this, "&crStudio &7| ");
 
-        // Загрузка конфигурации
         this.config = new ConfigManager(this);
         this.config.saveDefaultConfig();
         this.config.loadConfig();
 
-        // Проверка обновлений
         this.updateChecker = new UpdateChecker(this);
         this.updateChecker.checkForUpdates();
 
