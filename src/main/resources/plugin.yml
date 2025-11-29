@@ -5,8 +5,4 @@ load: POSTWORLD
 authors: [ reallmerry ]
 description: Loader
 website: rstudio-cdn.vercel.app
-commands:
-  spin:
-    description: test cmd
-    aliases:
-      - test
+folia-supported: true

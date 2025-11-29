@@ -20,6 +20,16 @@ public class SetupState {
         this.stateFile = new File(plugin.getDataFolder(), "setup-done.yml");
         this.config = YamlConfiguration.loadConfiguration(stateFile);
         this.log = log;
+
+        if (!stateFile.exists()) {
+            try {
+                stateFile.getParentFile().mkdirs();
+                config.set("setup_completed", false);
+                config.save(stateFile);
+            } catch (IOException e) {
+                log.msg("Failed to create setup state file: " + e.getMessage());
+            }
+        }
     }
 
     public boolean isSetupCompleted() {
@@ -28,8 +38,6 @@ public class SetupState {
 
     public void markSetupCompleted() {
         config.set("setup_completed", true);
-        config.set("last_setup_time", Instant.now().toString());
-        config.set("version", plugin.getDescription().getVersion());
 
         try {
             config.save(stateFile);

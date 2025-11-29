@@ -1,6 +1,7 @@
 package io.reallmerry.rstudio.loader.managers;
 
 import io.reallmerry.rstudio.loader.Loader;
+import io.reallmerry.rstudio.loader.core.ConfigManager;
 import io.reallmerry.rstudio.loader.core.LoggerManager;
 import io.reallmerry.rstudio.loader.utils.ColorUtil;
 import org.bukkit.Bukkit;
@@ -13,19 +14,15 @@ import java.util.List;
 
 public class WhitelistManager implements Listener {
     private final LoggerManager log;
-    private final List<String> rejectionMessages;
+    private List<String> rejectionMessages;
 
-    public WhitelistManager(Loader plugin, LoggerManager log) {
+    public WhitelistManager(Loader plugin, LoggerManager log, ConfigManager config) {
         this.log = log;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        // now: reading confing
+        String[] configMessages = config.getRejectionMessages();
+        this.rejectionMessages = Arrays.asList(configMessages);
 
-        this.rejectionMessages = Arrays.asList(
-                "",
-                "<red><bold>rStudio",
-                "",
-                "<white>Infrastructure Unavailable",
-                "<white>Operator authorization credentials required for network entry."
-        );
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler(ignoreCancelled = true)

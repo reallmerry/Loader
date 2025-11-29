@@ -16,14 +16,16 @@ public class LoaderCore {
 
     private final Loader plugin;
     private final LoggerManager log;
+    private final ConfigManager config;
     private final SetupState setupState;
     private final WhitelistManager whitelistManager;
 
-    public LoaderCore(Loader plugin, LoggerManager log) {
+    public LoaderCore(Loader plugin, LoggerManager log, ConfigManager config, WhitelistManager whitelistManager) {
         this.plugin = plugin;
         this.log = log;
+        this.config = config;
+        this.whitelistManager = whitelistManager;
         this.setupState = new SetupState(plugin, log);
-        this.whitelistManager = new WhitelistManager(plugin, log);
     }
 
     public void start() throws Exception {
@@ -32,6 +34,29 @@ public class LoaderCore {
             return;
         }
 
+        boolean isFolia = checkIfFolia();
+
+        if (isFolia) {
+            // folia
+            Bukkit.getAsyncScheduler().runNow(plugin, task -> {
+                runSetup();
+            });
+        } else {
+            // paper
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, this::runSetup);
+        }
+    }
+
+    private boolean checkIfFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    private void runSetup() {
         long totalStart = System.currentTimeMillis();
 
         long start = System.currentTimeMillis();
@@ -50,49 +75,89 @@ public class LoaderCore {
 
         long totalTime = System.currentTimeMillis() - totalStart;
 
-        log.log("<gray>Loading time:");
-        log.log("<dark_gray> ├ <gray>World: <white>" + worldTime + "ms");
-        log.log("<dark_gray> ├ <gray>Whitelist: <white>" + whitelistTime + "ms");
-        log.log("<dark_gray> ├ <gray>Plugins: <white>" + downloadTime + "ms");
-        log.log("<dark_gray> └ <gray>Total: <white>" + totalTime + "ms");
+        Bukkit.getGlobalRegionScheduler().run(plugin, task -> {
+            log.log("<gray>Loading time:");
+            log.log("<dark_gray> ├ <gray>World: <white>" + worldTime + "ms");
+            log.log("<dark_gray> ├ <gray>Whitelist: <white>" + whitelistTime + "ms");
+            log.log("<dark_gray> ├ <gray>Plugins: <white>" + downloadTime + "ms");
+            log.log("<dark_gray> └ <gray>Total: <white>" + totalTime + "ms");
 
-        log.log("<green>The installer has been successfully downloaded and is ready to run!");
+            log.log("<green>The installer has been successfully downloaded and is ready to run!");
+
+            log.log("<yellow>Server will restart in 5 seconds to complete setup...");
+
+            Bukkit.getGlobalRegionScheduler().runDelayed(plugin, restartTask -> {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+            }, 100L);
+        });
     }
 
     private void setupWorld() {
-        World world = Bukkit.getWorlds().get(0);
+        //support folia
+        Bukkit.getGlobalRegionScheduler().run(plugin, task -> {
+            World world = Bukkit.getWorlds().get(0);
 
-        world.setDifficulty(Difficulty.PEACEFUL);
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-        world.setTime(6000);
-        world.setStorm(false);
-        world.setThundering(false);
+            String difficultyStr = config.getConfig().getString("world.difficulty", "PEACEFUL");
+            Difficulty difficulty = Difficulty.valueOf(difficultyStr.toUpperCase());
+            world.setDifficulty(difficulty);
 
-        log.log("<gray>World settings: peaceful difficulty, frozen time, frozen weather");
+            boolean freezeTime = config.getConfig().getBoolean("world.freeze_time", true);
+            int time = config.getConfig().getInt("world.time", 6000);
+            world.setTime(time);
+
+            if (freezeTime) {
+                world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+            }
+
+            boolean disableWeather = config.getConfig().getBoolean("world.disable_weather", true);
+            boolean disableThunder = config.getConfig().getBoolean("world.disable_thunder", true);
+
+            if (disableWeather) {
+                world.setStorm(false);
+            }
+            if (disableThunder) {
+                world.setThundering(false);
+            }
+
+            log.log("<gray>World settings: " + difficulty + " difficulty, time=" + time +
+                    (freezeTime ? ", frozen time" : "") +
+                    (disableWeather ? ", frozen weather" : "") +
+                    (disableThunder ? ", no thunder" : ""));
+        });
     }
 
     private void setupWhitelist() {
-        Bukkit.setWhitelist(true);
-        Bukkit.getOfflinePlayer("reallmerry").setWhitelisted(true);
-        Bukkit.getOfflinePlayer("reallmerry").setOp(true);
+        Bukkit.getGlobalRegionScheduler().run(plugin, task -> {
+            boolean whitelistEnabled = config.getConfig().getBoolean("whitelist.enabled", true);
+            Bukkit.setWhitelist(whitelistEnabled);
 
-        log.log("<gray>The whitelist is activated. Administrator rights have been granted to reallmerry.");
+            if (whitelistEnabled) {
+                String[] opPlayers = config.getOpPlayers();
+                for (String playerName : opPlayers) {
+                    Bukkit.getOfflinePlayer(playerName).setWhitelisted(true);
+                    Bukkit.getOfflinePlayer(playerName).setOp(true);
+                    log.log("<gray>Administrator rights have been granted to " + playerName + ".");
+                }
+            }
+
+            log.log("<gray>The whitelist is " + (whitelistEnabled ? "activated" : "deactivated") + ".");
+        });
     }
 
     private void downloadPlugins() {
-        //download url
-        List<String> pluginUrls = Arrays.asList(
-                "https://rstudio-cdn.vercel.app/pl/Vault.jar",
-                "https://rstudio-cdn.vercel.app/pl/EssentialsX-2.22.0-dev+21-e9da116.jar"
-        );
+        if (!config.isAutoDownloadEnabled()) {
+            log.log("<gray>Auto-download disabled in configuration.");
+            return;
+        }
 
-        if (pluginUrls.isEmpty()) {
+        String[] pluginUrls = config.getPluginUrls();
+        if (pluginUrls.length == 0) {
             log.log("<gray>The list of plugins to download is empty.");
             return;
         }
 
         Downloader downloader = new Downloader(log);
-        downloader.downloadPlugins(pluginUrls);
+        downloader.downloadPlugins(Arrays.asList(pluginUrls));
     }
 
     public SetupState getSetupState() {

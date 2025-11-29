@@ -5,6 +5,11 @@ import org.bukkit.ChatColor;
 public class ColorUtil {
 
     public static String parseColor(String msg) {
+        if (msg == null || msg.isEmpty()) {
+            return "";
+        }
+
+        // now v1.1: больше символов!!!! БОЛЬШЕ!!!
         msg = msg.replace("<yellow>", "§e")
                 .replace("<gold>", "§6")
                 .replace("<green>", "§a")
@@ -20,7 +25,16 @@ public class ColorUtil {
                 .replace("<dark_purple>", "§5")
                 .replace("<dark_red>", "§4")
                 .replace("<dark_green>", "§2")
-                .replace("<bold>", "§b");
+                .replace("<bold>", "§l")
+                .replace("<italic>", "§o")
+                .replace("<underline>", "§n")
+                .replace("<strikethrough>", "§m")
+                .replace("<reset>", "§r");
+
         return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
+    public static String stripColor(String msg) {
+        return ChatColor.stripColor(parseColor(msg));
     }
 }
