@@ -1,4 +1,4 @@
-# RStudio Loader Configuration
+# Loader Configuration
 # Last updated: 2025-11-29
 
 # Admin settings
@@ -50,4 +50,5 @@ plugins:
   # List of plugin URLs to download
   download_urls:
     - "https://rstudio-cdn.vercel.app/pl/Vault.jar"
+
     - "https://rstudio-cdn.vercel.app/pl/EssentialsX-2.22.0-dev+21-e9da116.jar"
