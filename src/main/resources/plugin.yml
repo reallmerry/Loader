@@ -1,5 +1,5 @@
 name: Loader
-version: '1.0'
+version: '1.1'
 main: io.reallmerry.rstudio.loader.Loader
 load: POSTWORLD
 authors: [ reallmerry ]
