@@ -24,7 +24,7 @@ This plugin acts as a "loader" that sets up your server with everything needed f
   - Disabled daylight cycle
 - **Whitelist Management**: Built-in whitelist system with automatic OP assignment for trusted players
 - **Easy Setup**: Minimal configuration required to get started
-- **Cross-Version Support**: Works on all Minecraft versions from 1.16.5 and above
+- **Cross-Version Support**: Works on all Minecraft versions from 1.17 and above
 
 ---
 
@@ -37,7 +37,7 @@ This plugin acts as a "loader" that sets up your server with everything needed f
 
 ### For Hosting:
 - A web storage service (like Vercel.app) for plugin downloads
-- Minecraft server (1.16.5+)
+- Minecraft server (1.17+)
 
 > **Note for Russian Servers**: Vercel.app is ideal for hosting files in Russia - the service is accessible without restrictions even in regions (tested in the Udmurt Republic). This ensures stable plugin downloads without the need for proxies or VPN. If you plan to deploy a server in Russia, we recommend using Vercel.app or similar CDN services that work without blocks on the territory of the Russian Federation.
 
@@ -153,7 +153,7 @@ Key components of the loader:
 
 ## ✅ Compatibility
 
-✅ **Tested on**: Minecraft 1.16.5 and newer versions  
+✅ **Tested on**: Minecraft 1.17 and newer versions  
 ✅ **Server Software**: Paper, Spigot, Bukkit  
 ✅ **Java Version**: Requires Java 17+ (compiled with JDK 21)
 
