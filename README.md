@@ -1,4 +1,4 @@
-# 🧱 Loader Plugin
+# 🧱 Loader plugin
 
 **Easy Minecraft server setup with automatic plugin installation and configuration**
 
