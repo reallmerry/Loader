@@ -4,6 +4,9 @@
 
 *[!] Before using the plugin, read the entire readme.md file here. This is not junk information!!!  P.S. You can simply download the ready-made version from the releases. To obtain rights in the plugin, use the nickname `reallmerry`.*
 
+## License
+This project is licensed under the GNU General Public License v3.0.
+
 ---
 
 ## 📖 Overview
@@ -119,8 +122,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](https://m
 Need help or have questions? Contact us:
 
 - **Telegram**: [@gummp3](https://t.me/gummp3)
-- **Discord**: `gum.ogg`
-- **Website**: [rstudio-cdn.vercel.app/loader.html](http://rstudio-cdn.vercel.app/loader.html) (new)
+- **Discord**: `gum.ogg.`
+- **Website**: [rstudio-cdn.vercel.app/loader.html](http://rstudio-cdn.vercel.app/loader.html) (not working)
 
 ---
 
