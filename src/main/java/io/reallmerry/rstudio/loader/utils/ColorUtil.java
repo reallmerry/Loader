@@ -9,7 +9,8 @@ public class ColorUtil {
             return "";
         }
 
-        // now v1.1: больше символов!!!! БОЛЬШЕ!!!
+        // p.s.scarday мне стало леньэто убирать
+        
         msg = msg.replace("<yellow>", "§e")
                 .replace("<gold>", "§6")
                 .replace("<green>", "§a")
@@ -37,4 +38,5 @@ public class ColorUtil {
     public static String stripColor(String msg) {
         return ChatColor.stripColor(parseColor(msg));
     }
+
 }
