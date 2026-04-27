@@ -1,0 +1,96 @@
+# Loader Configuration
+# Last updated: 2026-04-26
+
+admin:
+  # Список игроков, которые автоматически получат опку и доступ при включённом whitelist
+  op-players:
+    - "reallmerry"
+
+  # Уведомлять ли в игре о новых версиях плагина
+  # Получат только оперататоры
+  notify-about-updates: true
+
+
+world:
+  # Сложность мира: PEACEFUL / EASY / NORMAL / HARD
+  difficulty: "PEACEFUL"
+
+  # Время в мире (0–24000, 6000 = день)
+  time: 6000
+
+  # Остановить цикл дня/ночи
+  freeze-time: true
+
+  # Отключить дождь
+  disable-weather: true
+
+  # Отключить грозу
+  disable-thunder: true
+
+
+whitelist:
+  # Включить whitelist (разрешён вход только операторам, прописанным в конфиге)
+  enabled: true
+
+  # Сообщения при вайтлисте
+  rejection-messages:
+    - ""
+    - "<red><bold>rStudio</bold></red>"
+    - ""
+    - "<white>Infrastructure Unavailable"
+    - "<white>Operator authorization credentials required for network entry."
+    - ""
+    - "<gray>Access denied. Contact server administration."
+
+
+plugins:
+  # Автоматически скачивать плагины при запуске
+  auto-download: true
+
+  # Сколько резервных копий хранить (старые удаляются)
+  backup-retain-count: 3
+
+  # Список плагинов для скачивания
+  list: []
+  # Пример:
+  # list:
+  #   - url: "https://example.com/plugin.jar"   # Ссылка на файл
+  #     file-name: "plugin.jar"                 # Имя файла в папке plugins
+  #     sha256: ""                              # SHA-256 (опционально, для проверки)
+  #     headers:                                # HTTP заголовки (опционально)
+  #       Authorization: "Bearer token"
+  # !!!!! ВАЖНО !!!!! если У ВАС НЕТ SHA-256 ПРОВЕРКИ - ВЫРЕЗАЙТЕ СТРОКУ ПОЛНОСТЬЮ !!!!!
+  # ПОЗЖЕ Я ИСПРАВЛЮ ДАННЫЙ КОСЯК
+
+notifications:
+  discord:
+    # Включить отправку в Discord сообщения (вебхук)
+    enabled: false
+
+    # URL webhook'а
+    webhook-url: ""
+
+    # Плейсхолдеры сообщений
+    # {server_name} - имя сервера
+    # {count}       - количество плагинов
+    # {ms}          - время загрузки
+    # {plugins}     - список плагинов (выводятсяid)
+    message: "✅ {server_name}: loaded {count} plugins in {ms}ms\n{plugins}"
+
+
+  telegram:
+    # Включить отправку в Telegram
+    enabled: false
+
+    # Токен бота
+    bot-token: ""
+
+    # ID чата (или пользователя)
+    chat-id: ""
+
+    # Плейсхолдеры сообщений
+    # {server_name} - имя сервера
+    # {count}       - количество плагинов
+    # {ms}          - время загрузки
+    # {plugins}     - список плагинов (выводятсяid)
+    message: "✅ {server_name}: loaded {count} plugins in {ms}ms\n{plugins}"

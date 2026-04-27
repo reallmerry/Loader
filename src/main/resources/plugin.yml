@@ -1,0 +1,7 @@
+name: Loader
+version: '1.2-alpha'
+main: io.reallmerry.rstudio.loader.Loader
+authors: [ reallmerry ]
+description: Автоматический загрузчик для тестовых серверов
+website: https://reallmerry.store
+folia-supported: true
