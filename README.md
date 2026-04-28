@@ -121,8 +121,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](https://m
 
 Need help or have questions? Contact us:
 
-- **Telegram**: [@gummp3](https://t.me/gummp3)
-- **Discord**: `gum.ogg.`
+- **Telegram**: [@gummp3](https://t.me/gummp4)
+- **Discord**: `ca4h`
 - **Website**: [rstudio-cdn.vercel.app/loader.html](http://rstudio-cdn.vercel.app/loader.html) (not working)
 
 ---
