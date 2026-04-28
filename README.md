@@ -123,7 +123,7 @@ Need help or have questions? Contact us:
 
 - **Telegram**: [@gummp3](https://t.me/gummp4)
 - **Discord**: `ca4h`
-- **Website**: [rstudio-cdn.vercel.app/loader.html](http://rstudio-cdn.vercel.app/loader.html) (not working)
+- **Website**: [reallmerry.store/rloader](https://reallmerry.store/rloader/)
 
 ---
 
