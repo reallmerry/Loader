@@ -12,6 +12,7 @@ public final class SetupState {
 
     private final PluginLogger log;
     private final YamlConfigurationLoader loader;
+    private ConfigurationNode cachedNode;
 
     public SetupState(JavaPlugin plugin, PluginLogger log) {
         this.log = log;
@@ -24,7 +25,8 @@ public final class SetupState {
 
     public boolean completed() {
         try {
-            return loader.load().node("setup_completed").getBoolean(false);
+            cachedNode = loader.load();
+            return cachedNode.node("setup_completed").getBoolean(false);
         } catch (ConfigurateException e) {
             log.warn("<yellow>Could not read setup state, assuming incomplete: " + e.getMessage());
             return false;
@@ -33,9 +35,9 @@ public final class SetupState {
 
     public void markCompleted() {
         try {
-            ConfigurationNode node = loader.load();
-            node.node("setup_completed").set(true);
-            loader.save(node);
+            if (cachedNode == null) cachedNode = loader.load();
+            cachedNode.node("setup_completed").set(true);
+            loader.save(cachedNode);
         } catch (ConfigurateException e) {
             log.error("<red>Failed to persist setup state: " + e.getMessage());
         }

@@ -7,15 +7,23 @@ import java.util.concurrent.CountDownLatch;
 
 public final class Platform {
 
+    private static final boolean FOLIA;
+
+    static {
+        boolean folia;
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            folia = true;
+        } catch (ClassNotFoundException e) {
+            folia = false;
+        }
+        FOLIA = folia;
+    }
+
     private Platform() {}
 
     public static boolean isFolia() {
-        try {
-            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
+        return FOLIA;
     }
 
     public static void scheduleOnMain(JavaPlugin plugin, Runnable task) {

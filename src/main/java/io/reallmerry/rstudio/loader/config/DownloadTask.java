@@ -15,7 +15,12 @@ public record DownloadTask(
         return new DownloadTask(url, Map.of(), null);
     }
 
+    public boolean hasValidHash() { return sha256 != null && !sha256.isBlank() && !sha256.equalsIgnoreCase("null"); }
+
     public String fileName() {
-        return Paths.get(URI.create(url).getPath()).getFileName().toString();
+        var path = Paths.get(URI.create(url).getPath());
+        var name = path.getFileName();
+        if (name == null) throw new IllegalArgumentException("Cannot resolve filename from URL: " + url);
+        return name.toString();
     }
 }

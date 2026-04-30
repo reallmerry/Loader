@@ -65,7 +65,7 @@ public final class PluginDownloader implements Downloader {
             Files.copy(body, tempFile, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        if (task.sha256() != null) verifySha256(tempFile, task.sha256(), task.fileName());
+        if (task.hasValidHash()) verifySha256(tempFile, task.sha256(), task.fileName());
         if (Files.exists(destination)) backup(destination, task.fileName());
         Files.move(tempFile, destination, StandardCopyOption.REPLACE_EXISTING);
 

@@ -4,6 +4,7 @@ import io.reallmerry.rstudio.loader.config.PluginConfig;
 import io.reallmerry.rstudio.loader.core.PluginLogger;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,26 +27,21 @@ public final class PlayerAccess implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPreLogin(AsyncPlayerPreLoginEvent event) {
-        PluginConfig.WhitelistConfig wc = config.whitelist();
-        if (!wc.enabled()) return;
-
-        if (config.admin().opPlayers().contains(event.getName())) return;
+        if (!config.whitelist().enabled()) return;
+        if (Bukkit.getOfflinePlayer(event.getUniqueId()).isWhitelisted()) return;
 
         event.disallow(
                 AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST,
-                buildKickMessage(wc.rejectionMessages())
+                buildKickMessage(config.whitelist().rejectionMessages())
         );
         log.info("<gray>Blocked non-whitelisted join: <white>" + event.getName());
     }
 
     private Component buildKickMessage(List<String> lines) {
         if (lines.isEmpty()) return Component.empty();
-
-        int offset = ThreadLocalRandom.current().nextInt(lines.size());
         var builder = Component.text();
         for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get((i + offset) % lines.size());
-            builder.append(MM.deserialize(line));
+            builder.append(MM.deserialize(lines.get(i)));
             if (i < lines.size() - 1) builder.append(Component.newline());
         }
         return builder.build();

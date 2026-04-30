@@ -1,5 +1,5 @@
 name: Loader
-version: '1.2-alpha'
+version: '1.2.1'
 main: io.reallmerry.rstudio.loader.Loader
 authors: [ reallmerry ]
 description: Автоматический загрузчик для тестовых серверов

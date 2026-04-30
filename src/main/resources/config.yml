@@ -58,9 +58,9 @@ plugins:
   #     file-name: "plugin.jar"                 # Имя файла в папке plugins
   #     sha256: ""                              # SHA-256 (опционально, для проверки)
   #     headers:                                # HTTP заголовки (опционально)
+  #       Accept: "application/octet-stream"    # обязательно в случае проверки HA-256
   #       Authorization: "Bearer token"
-  # !!!!! ВАЖНО !!!!! если У ВАС НЕТ SHA-256 ПРОВЕРКИ - ВЫРЕЗАЙТЕ СТРОКУ ПОЛНОСТЬЮ !!!!!
-  # ПОЗЖЕ Я ИСПРАВЛЮ ДАННЫЙ КОСЯК
+
 
 notifications:
   discord:
